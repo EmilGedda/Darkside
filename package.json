@@ -9,7 +9,7 @@
     "start": "npm run serve",
     "serve": "node dist/app.js",
     "watch-ts": "tsc -w",
-    "check-lint": "npx eslint --max-warnings 1 {src,test}/**/*.ts",
+    "check-lint": "npx eslint --max-warnings 0 {src,test}/**/*.ts",
     "lint": "npx eslint --fix {src,test}/**/*.ts",
     "check-format": "npx prettier --check {src,test}/**/*.ts",
     "format": "npx prettier --write {src,test}/**/*.ts"
