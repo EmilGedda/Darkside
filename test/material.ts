@@ -20,7 +20,7 @@ const SCHOTT_BAF10 = new Material(
 );
 
 test('Material construction', async () => {
-    const m = new Material(0, 0, 0, 0, 0, 0);
+    new Material(0, 0, 0, 0, 0, 0);
 });
 
 test('Material.refractiveIndex(lambda: number): number', async () => {
