@@ -29,14 +29,14 @@ export class Material {
      * Calculate the refractive index of the material for a given wavelength
      * using the Sellmeier equation.
      *
-     * @param lambda Wavelength in vacuum
+     * @param wavelength Wavelength in vacuum
      *
      * @returns The refractive index of the material for a given wavelength.
      */
-    public refractiveIndex(lambda: number): number {
-        const a = (this.b1 * lambda ** 2) / (lambda ** 2 - this.c1);
-        const b = (this.b2 * lambda ** 2) / (lambda ** 2 - this.c2);
-        const c = (this.b3 * lambda ** 2) / (lambda ** 2 - this.c3);
+    public refractiveIndex(wavelength: number): number {
+        const a = (this.b1 * wavelength ** 2) / (wavelength ** 2 - this.c1);
+        const b = (this.b2 * wavelength ** 2) / (wavelength ** 2 - this.c2);
+        const c = (this.b3 * wavelength ** 2) / (wavelength ** 2 - this.c3);
         return Math.sqrt(1 + a + b + c);
     }
 }
