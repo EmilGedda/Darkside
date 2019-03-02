@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "First post"
-date:   2019-03-02 21:40:30 +0100
+title:  "Class Diagram"
+date:   2019-03-02 21:56:30 +0100
 ---
 To start our project off, we made a simple UML-like sketch of our software.
 
