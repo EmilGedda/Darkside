@@ -5,7 +5,7 @@ date:   2019-03-02 21:56:30 +0100
 ---
 To start our project off, we made a simple UML-like sketch of our software.
 
-![Class Diagram](/assets/class-diagram.png)
+![Class Diagram](/Darkside/assets/class-diagram.png)
 
 We believe this will help us get an overview of what needs to be implemented for this simulation to work. Below are some short descriptions of the classes from the diagram.
 
