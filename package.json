@@ -4,7 +4,7 @@
   "description": "A simulatino of light, prisms, reflection  and refraction",
   "main": "dist/app.js",
   "scripts": {
-    "test": "echo No tests added yet",
+    "test": "jest",
     "build": "tsc",
     "start": "npm run serve",
     "serve": "node dist/app.js",
@@ -28,13 +28,16 @@
   },
   "homepage": "https://github.com/EmilGedda/Darkside#readme",
   "devDependencies": {
+    "@types/jest": "^24.0.9",
     "@typescript-eslint/eslint-plugin": "^1.4.2",
     "@typescript-eslint/parser": "^1.4.2",
     "@typescript-eslint/typescript-estree": "^1.4.2",
     "eslint": "^5.14.1",
     "eslint-config-prettier": "^4.1.0",
     "eslint-plugin-prettier": "^3.0.1",
+    "jest": "^24.1.0",
     "prettier": "^1.16.4",
+    "ts-jest": "^24.0.0",
     "typescript": "^3.3.3333"
   }
 }
