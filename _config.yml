@@ -17,7 +17,7 @@ title: Darkside
 email: emil.gedda@emilgedda.se
 description: >- # this means to ignore newlines until "baseurl:"
   Darkside - Light Refraction Simulation
-baseurl: "/darkside" # the subpath of your site, e.g. /blog
+baseurl: "/Darkside" # the subpath of your site, e.g. /blog
 url: "http://emilgedda.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  EmilGedda
 
