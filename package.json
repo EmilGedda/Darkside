@@ -9,6 +9,7 @@
     "start": "npm run serve",
     "serve": "node dist/app.js",
     "watch-ts": "tsc -w",
+    "watch": "tsc -w & npx webpack --watch",
     "check-lint": "npx eslint --max-warnings 0 {src,test}/**/*.ts",
     "lint": "npx eslint --fix {src,test}/**/*.ts",
     "check-format": "npx prettier --check {src,test}/**/*.ts",

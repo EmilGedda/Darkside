@@ -4,15 +4,6 @@ import { Vector2, EquilateralTriangle } from './vector2';
 import { RenderConfig } from './renderconfig';
 import { Prism } from './prism';
 
-declare global {
-    interface Window {
-        context: CanvasRenderingContext2D;
-        grid: Grid;
-        ready: boolean;
-        config: RenderConfig;
-    }
-}
-
 function render(): void {
     let canvas = document.getElementById('canvas') as HTMLCanvasElement;
     canvas.width = window.innerWidth;
@@ -35,11 +26,6 @@ function render(): void {
     context.fillStyle = config.backgroundColor;
     context.fillRect(0, 0, canvas.width, canvas.height);
     grid.render(context);
-
-    window.context = context;
-    window.grid = grid;
-    window.ready = true;
-    window.config = config;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
