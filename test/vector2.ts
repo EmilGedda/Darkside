@@ -1,4 +1,4 @@
-import { Vector2 } from '../src/vector2';
+import { Vector2, EquilateralTriangle } from '../src/vector2';
 
 test('Vector2 construction', async () => {
     let v = new Vector2();
@@ -44,4 +44,29 @@ test('Vector2 fromRadians()', async () => {
     v2 = Vector2.fromRadians(theta);
     expect(v1.x).toBeCloseTo(v2.x);
     expect(v1.y).toBeCloseTo(v2.y);
+});
+
+test('Vector2 EquilateralTriangle()', async () => {
+    const origo = new Vector2(0, 0);
+    expect(
+        EquilateralTriangle(origo, 0)
+            .map(v => v.x + v.y)
+            .reduce((a, b) => a + b)
+    ).toBeCloseTo(0);
+
+    const steps = 10000;
+    for (let i = 0; i < steps; i++) {
+        const rotation = i * ((2 * Math.PI) / steps);
+        const triangles = EquilateralTriangle(origo, 1, rotation);
+        for (let j = 0; j < 3; j++) {
+            const unit = Vector2.fromRadians(
+                -rotation - // they rotation opposite directions
+                Math.PI / 2 - // with a 90 degree offset
+                    (j * (2 * Math.PI)) / 3 // offset of every vertex in our equalateral triangle
+            );
+            const { x, y } = triangles[j];
+            expect(x).toBeCloseTo(unit.x);
+            expect(y).toBeCloseTo(unit.y);
+        }
+    }
 });

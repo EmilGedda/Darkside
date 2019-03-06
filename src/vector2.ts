@@ -28,6 +28,13 @@ export class Vector2 {
     }
 }
 
+/**
+ * Create a equalateral triangle given a center, radius, and a rotation
+ * @param center center point of the triangle
+ * @param radius the distance from the center to the vertices
+ * @param rotation the rotation of the triangle
+ * @return the three Vector2 which make up the triangle
+ */
 export function EquilateralTriangle(
     center: Vector2,
     radius: number,

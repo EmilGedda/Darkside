@@ -1,5 +1,9 @@
-// To hold color of lines, color of background and so on.
+/**
+ * Holds color of lines, color of background and so on.
+ * Defines the style of the render, for `themes`
+ */
 export class RenderConfig {
+    //TODO Colors should use the RGB classes instead of strings
     public readonly backgroundColor: string;
     public readonly lineColor: string;
     public readonly lineWidth: number;
