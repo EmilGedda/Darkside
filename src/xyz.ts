@@ -25,9 +25,9 @@ export class XYZ {
         let b = 0.0556434 * this.x - 0.2040259 * this.y + 1.0572252 * this.z;
 
         // Gamma Correction
-        r = Math.floor(this.gammaCorr(r) * 255);
-        g = Math.floor(this.gammaCorr(g) * 255);
-        b = Math.floor(this.gammaCorr(b) * 255);
+        r = Math.floor(this.gammaCorrection(r) * 255);
+        g = Math.floor(this.gammaCorrection(g) * 255);
+        b = Math.floor(this.gammaCorrection(b) * 255);
 
         return new RGB(r, g, b);
     }
