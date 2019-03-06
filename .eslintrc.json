@@ -4,7 +4,8 @@
         "es6": true
     },
     "rules": {
-        "semi": "error"
+        "semi": "error",
+        "max-len": [2, 120, 4]
     },
     "parserOptions":  {
         "ecmaVersion":  2018,

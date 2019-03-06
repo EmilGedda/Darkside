@@ -9,14 +9,7 @@ export class Material {
     private c2: number;
     private c3: number;
 
-    public constructor(
-        b1: number,
-        b2: number,
-        b3: number,
-        c1: number,
-        c2: number,
-        c3: number,
-    ) {
+    public constructor(b1: number, b2: number, b3: number, c1: number, c2: number, c3: number) {
         this.b1 = b1;
         this.b2 = b2;
         this.b3 = b3;
