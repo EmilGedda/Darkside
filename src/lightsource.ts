@@ -33,6 +33,5 @@ export class LightSource implements Drawable {
         context.fillStyle = gradient;
         context.fill();
         context.closePath();
-        console.log('Light source drawn at (' + x + ',' + y + ')');
     }
 }

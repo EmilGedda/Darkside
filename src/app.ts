@@ -4,16 +4,20 @@ import { Vector2, EquilateralTriangle } from './vector2';
 import { RenderConfig } from './renderconfig';
 import { Prism } from './prism';
 
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('Darkside started');
+declare global {
+    interface Window {
+        context: CanvasRenderingContext2D;
+        grid: Grid;
+        ready: boolean;
+        config: RenderConfig;
+    }
+}
+
+function render(): void {
     let canvas = document.getElementById('canvas') as HTMLCanvasElement;
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     let context = canvas.getContext('2d') as CanvasRenderingContext2D;
-
-    const config = new RenderConfig();
-    context.fillStyle = config.backgroundColor;
-    context.fillRect(0, 0, canvas.width, canvas.height);
 
     const prismCenter = new Vector2(canvas.width * 0.7, canvas.height * 0.5);
 
@@ -27,5 +31,20 @@ document.addEventListener('DOMContentLoaded', () => {
     let prisms = [EquilateralTriangle(prismCenter, 100)].map(vertices => new Prism(vertices));
 
     let grid = new Grid(lightsources, prisms);
+    const config = new RenderConfig();
+    context.fillStyle = config.backgroundColor;
+    context.fillRect(0, 0, canvas.width, canvas.height);
     grid.render(context);
+
+    window.context = context;
+    window.grid = grid;
+    window.ready = true;
+    window.config = config;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('Darkside started');
+    render();
 });
+
+window.addEventListener('resize', render);
