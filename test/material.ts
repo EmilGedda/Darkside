@@ -7,7 +7,7 @@ const SCHOTT_BK7 = new Material(
     0.231792344,
     6.00069867e-3,
     2.00179144e-2,
-    1.03560653e2,
+    1.03560653e2
 );
 // Schott BAF10 glass
 const SCHOTT_BAF10 = new Material(
@@ -16,7 +16,7 @@ const SCHOTT_BAF10 = new Material(
     1.08521269,
     0.926681282e-2,
     0.0424489805,
-    1.05613573e2,
+    1.05613573e2
 );
 
 test('Material construction', async () => {
