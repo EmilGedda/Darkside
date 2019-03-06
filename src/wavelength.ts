@@ -43,16 +43,12 @@ export class Wavelength {
     private y(): number {
         let t1 = (this.value - 568.8) * (this.value < 568.8 ? 0.0213 : 0.0247);
         let t2 = (this.value - 530.9) * (this.value < 530.9 ? 0.0613 : 0.0322);
-        return (
-            0.821 * Math.exp(-0.5 * t1 * t1) + 0.286 * Math.exp(-0.5 * t2 * t2)
-        );
+        return 0.821 * Math.exp(-0.5 * t1 * t1) + 0.286 * Math.exp(-0.5 * t2 * t2);
     }
 
     private z(): number {
         let t1 = (this.value - 437.0) * (this.value < 437.0 ? 0.0845 : 0.0278);
         let t2 = (this.value - 459.0) * (this.value < 459.0 ? 0.0385 : 0.0725);
-        return (
-            1.217 * Math.exp(-0.5 * t1 * t1) + 0.681 * Math.exp(-0.5 * t2 * t2)
-        );
+        return 1.217 * Math.exp(-0.5 * t1 * t1) + 0.681 * Math.exp(-0.5 * t2 * t2);
     }
 }
