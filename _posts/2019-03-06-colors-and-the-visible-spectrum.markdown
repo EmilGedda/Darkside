@@ -49,7 +49,7 @@ float zFit_1931( float wave )
 {
     float t1 = (wave-437.0f)*((wave<437.0f)?0.0845f:0.0278f);
     float t2 = (wave-459.0f)*((wave<459.0f)?0.0385f:0.0725f);
-    return
+    return 1.217f*exp(-0.5f*t1*t1) + 0.681f*expf(-0.5f*t2*t2);
 }
 ```
 
