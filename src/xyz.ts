@@ -38,7 +38,7 @@ export class XYZ {
      * @param u value to be gamma corrected
      * @returns gamma corrected value u
      */
-    private gammaCorr(u: number): number {
+    private gammaCorrection(u: number): number {
         u = Math.max(u, 0);
         if (Math.abs(u) < 0.0031308) return 12.92 * u;
         return 1.055 * u ** (1 / 2.4) - 0.055;
