@@ -5,7 +5,7 @@
   "main": "dist/app.js",
   "scripts": {
     "test": "jest",
-    "build": "tsc && cp -fr css dist/ && npx webpack",
+    "build": "tsc && cp -rf src/index.html css dist/ && npx webpack",
     "start": "npm run serve",
     "serve": "node dist/app.js",
     "watch-ts": "tsc -w",
