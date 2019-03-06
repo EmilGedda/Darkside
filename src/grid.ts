@@ -23,7 +23,7 @@ export class Grid {
     }
 
     public render(context: CanvasRenderingContext2D): void {
-        const drawables = (this.lights as Drawable[]).concat(this.prisms as Drawable[]);
+        const drawables = (this.prisms as Drawable[]).concat(this.lights as Drawable[]);
         drawables.map(obj => obj.draw(context, this.config));
     }
 }

@@ -9,6 +9,7 @@ export class LightSource implements Drawable {
     private rotation: Radians;
     private position: Point;
     private spectrum: Wavelength[];
+
     public constructor(
         position: Point = new Vector2(0, 0),
         rotation: Radians = 0,
@@ -24,12 +25,14 @@ export class LightSource implements Drawable {
         const y = this.position.y;
         const radius = config.lightsourceRadius;
         let gradient = context.createRadialGradient(x, y, radius, x, y, radius * 0.5);
-        gradient.addColorStop(0, "rgba(255, 255, 255, 0)");
+        gradient.addColorStop(0, 'rgba(255, 255, 255, 0)');
         gradient.addColorStop(1, config.lightsourceColor);
+        context.beginPath();
         context.fillRect(x - radius, y - radius, radius * 2, radius * 2);
         context.arc(x, y, config.lightsourceRadius, 0, 2 * Math.PI);
         context.fillStyle = gradient;
         context.fill();
-        console.log('Light source drew at (' + x + ',' + y + ')');
+        context.closePath();
+        console.log('Light source drawn at (' + x + ',' + y + ')');
     }
 }

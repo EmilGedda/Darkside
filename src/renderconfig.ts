@@ -1,6 +1,6 @@
 // To hold color of lines, color of background and so on.
 export class RenderConfig {
-    public readonly backgroundColor: string
+    public readonly backgroundColor: string;
     public readonly lineColor: string;
     public readonly lineWidth: number;
     public readonly lightsourceColor: string;

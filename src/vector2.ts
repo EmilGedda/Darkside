@@ -27,3 +27,23 @@ export class Vector2 {
         return new Vector2(Math.cos(theta), Math.sin(theta));
     }
 }
+
+export function EquilateralTriangle(
+    center: Vector2,
+    radius: number,
+    rotation: number = 0
+): Vector2[] {
+    let x = center.x;
+    let y = center.y;
+    return [
+        new Vector2(x - radius * Math.sin(rotation), y - radius * Math.cos(rotation)),
+        new Vector2(
+            x - radius * Math.sin(rotation + (2 * Math.PI) / 3),
+            y - radius * Math.cos(rotation + (2 * Math.PI) / 3)
+        ),
+        new Vector2(
+            x - radius * Math.sin(rotation + (4 * Math.PI) / 3),
+            y - radius * Math.cos(rotation + (4 * Math.PI) / 3)
+        ),
+    ];
+}
