@@ -37,7 +37,10 @@ jobs:
               git checkout gh-pages
               rm -rf demo
               mv dist demo
-              git add demo
-              git commit -m "$(git log develop --no-decorate --oneline -1 --abbrev-commit)"
-              git push -u origin gh-pages
+              git diff --exit-code demo
+              if [ $? -eq 1 ]; then
+                git add demo
+                git commit -m "$(git log develop --no-decorate --oneline -1 --abbrev-commit)"
+                git push -u origin gh-pages
+              fi
             fi
