@@ -38,6 +38,6 @@ jobs:
               rm -rf demo
               mv dist demo
               git add demo
-              git commit -m "$(git log --no-decorate --oneline -1 --abbrev-commit)"
+              git commit -m "$(git log develop --no-decorate --oneline -1 --abbrev-commit)"
               git push -u origin gh-pages
             fi
