@@ -32,6 +32,8 @@ jobs:
           name: Deploy Darkside demo
           command: |
             if [ "${CIRCLE_BRANCH}" == "develop" ]; then
+              git config --global user.email "circleci@circleci"
+              git config --global user.name CircleCI
               git checkout gh-pages
               rm -rf demo
               mv dist demo
