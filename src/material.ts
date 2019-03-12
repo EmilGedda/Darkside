@@ -1,3 +1,14 @@
+import fs from 'fs';
+import path from 'path';
+
+/**
+ * Material name constants.
+ */
+export enum MATERIAL {
+    SCHOTT_BK7 = 'SCHOTT_BK7',
+    SCHOTT_BAF10 = 'SCHOTT_BAF10',
+}
+
 /**
  * Material defined by Sellmeier coefficients.
  */
@@ -9,7 +20,11 @@ export class Material {
     private c2: number;
     private c3: number;
 
-    public constructor(coeffs: number[]) {
+    public constructor(material: MATERIAL = MATERIAL.SCHOTT_BK7) {
+        const jsonPath = path.join(__dirname, 'data', 'materials.json');
+        const json = JSON.parse(fs.readFileSync(jsonPath).toString());
+        const coeffs = json[material];
+
         this.b1 = coeffs[0];
         this.b2 = coeffs[1];
         this.b3 = coeffs[2];
