@@ -37,22 +37,19 @@ document.addEventListener('DOMContentLoaded', () => {
     let context = canvas.getContext('2d') as CanvasRenderingContext2D;
 
     let grid = new Grid();
-
-    window.addEventListener('resize', () => {
-        resize(grid, context);
-    });
+    window.addEventListener('resize', () => resize(grid, context));
 
     resize(grid, context);
     grid.render(context);
     const fps = 1;
 
-    var lastRender = new Date().getTime();
+    var lastRender = performance.now();
     setInterval(() => {
-        var startTime = new Date().getTime();
-        var timeDelta = startTime - lastRender;
+        let startTime = performance.now();
+        let timeDelta = startTime - lastRender;
         grid.update(timeDelta);
         grid.render(context);
-        lastRender = new Date().getTime();
+        lastRender = performance.now();
         console.log('Update+render took: ' + (lastRender - startTime) + 'ms');
     }, 1000 / fps);
 });
