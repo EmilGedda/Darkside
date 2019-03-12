@@ -8,9 +8,9 @@ import { RenderConfig } from './renderconfig';
  * This is what can be considered the root object of the simulation
  */
 export class Grid {
-    private lights: LightSource[];
-    private prisms: Prism[];
-    private config: RenderConfig;
+    public lights: LightSource[];
+    public prisms: Prism[];
+    public config: RenderConfig;
 
     public constructor(
         lights: LightSource[] = [],
@@ -23,27 +23,17 @@ export class Grid {
     }
 
     /**
-     * Adds a LightSource to the grid
-     * @param light The LightSource to add
-     */
-    public addLightSource(light: LightSource): void {
-        this.lights.push(light);
-    }
-
-    /**
-     * Adds a Prism to the grid
-     * @param prism The Prism to add
-     */
-    public addPrism(prism: Prism): void {
-        this.prisms.push(prism);
-    }
-
-    /**
      * Renders the grid with the given 2D context
      * @param context The rendering context to use for rendering
      */
     public render(context: CanvasRenderingContext2D): void {
         const drawables = (this.prisms as Drawable[]).concat(this.lights as Drawable[]);
+        context.fillStyle = this.config.backgroundColor;
+        context.fillRect(0, 0, context.canvas.width, context.canvas.height);
         drawables.map(obj => obj.draw(context, this.config));
+    }
+
+    public update(timeDelta: number): void {
+        console.log('Sleep time: ' + timeDelta + 'ms');
     }
 }
