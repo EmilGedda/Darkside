@@ -98,18 +98,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lightsource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./lightsource */ "./dist/lightsource.js");
 /* harmony import */ var _grid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./grid */ "./dist/grid.js");
 /* harmony import */ var _vector2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./vector2 */ "./dist/vector2.js");
-/* harmony import */ var _renderconfig__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./renderconfig */ "./dist/renderconfig.js");
-/* harmony import */ var _prism__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./prism */ "./dist/prism.js");
+/* harmony import */ var _prism__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./prism */ "./dist/prism.js");
 
 
 
 
-
-function render() {
-    let canvas = document.getElementById('canvas');
+function resize(grid, context) {
+    const canvas = context.canvas;
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    let context = canvas.getContext('2d');
     const prismCenter = new _vector2__WEBPACK_IMPORTED_MODULE_2__["Vector2"](canvas.width * 0.7, canvas.height * 0.5);
     let lightsources = [
         new _vector2__WEBPACK_IMPORTED_MODULE_2__["Vector2"](canvas.width * 0.2 - 5, canvas.height * 0.2 - 5),
@@ -117,18 +114,30 @@ function render() {
         new _vector2__WEBPACK_IMPORTED_MODULE_2__["Vector2"](canvas.width * 0.8 - 5, canvas.height * 0.8 - 5),
         prismCenter,
     ].map(pos => new _lightsource__WEBPACK_IMPORTED_MODULE_0__["LightSource"](pos));
-    let prisms = [Object(_vector2__WEBPACK_IMPORTED_MODULE_2__["EquilateralTriangle"])(prismCenter, 100)].map(vertices => new _prism__WEBPACK_IMPORTED_MODULE_4__["Prism"](vertices));
-    let grid = new _grid__WEBPACK_IMPORTED_MODULE_1__["Grid"](lightsources, prisms);
-    const config = new _renderconfig__WEBPACK_IMPORTED_MODULE_3__["RenderConfig"]();
-    context.fillStyle = config.backgroundColor;
-    context.fillRect(0, 0, canvas.width, canvas.height);
-    grid.render(context);
+    let prisms = [Object(_vector2__WEBPACK_IMPORTED_MODULE_2__["EquilateralTriangle"])(prismCenter, 100)].map(vertices => new _prism__WEBPACK_IMPORTED_MODULE_3__["Prism"](vertices));
+    grid.lights = lightsources;
+    grid.prisms = prisms;
 }
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Darkside started');
-    render();
+    let grid = new _grid__WEBPACK_IMPORTED_MODULE_1__["Grid"]();
+    let canvas = document.getElementById('canvas');
+    let context = canvas.getContext('2d');
+    window.addEventListener('resize', () => {
+        resize(grid, context);
+    });
+    resize(grid, context);
+    const fps = 60;
+    var lastRender = new Date().getTime();
+    setInterval(() => {
+        var startTime = new Date().getTime();
+        var timeDelta = startTime - lastRender;
+        grid.update(timeDelta);
+        grid.render(context);
+        lastRender = new Date().getTime();
+        console.log('Update+render took: ' + (lastRender - startTime) + 'ms');
+    }, 1000 / fps);
 });
-window.addEventListener('resize', render);
 //# sourceMappingURL=app.js.map
 
 /***/ }),
@@ -187,26 +196,17 @@ class Grid {
         this.config = config;
     }
     /**
-     * Adds a LightSource to the grid
-     * @param light The LightSource to add
-     */
-    addLightSource(light) {
-        this.lights.push(light);
-    }
-    /**
-     * Adds a Prism to the grid
-     * @param prism The Prism to add
-     */
-    addPrism(prism) {
-        this.prisms.push(prism);
-    }
-    /**
      * Renders the grid with the given 2D context
      * @param context The rendering context to use for rendering
      */
     render(context) {
         const drawables = this.prisms.concat(this.lights);
+        context.fillStyle = this.config.backgroundColor;
+        context.fillRect(0, 0, context.canvas.width, context.canvas.height);
         drawables.map(obj => obj.draw(context, this.config));
+    }
+    update(timeDelta) {
+        console.log('Sleep time: ' + timeDelta + 'ms');
     }
 }
 //# sourceMappingURL=grid.js.map

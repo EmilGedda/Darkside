@@ -10,26 +10,17 @@ export class Grid {
         this.config = config;
     }
     /**
-     * Adds a LightSource to the grid
-     * @param light The LightSource to add
-     */
-    addLightSource(light) {
-        this.lights.push(light);
-    }
-    /**
-     * Adds a Prism to the grid
-     * @param prism The Prism to add
-     */
-    addPrism(prism) {
-        this.prisms.push(prism);
-    }
-    /**
      * Renders the grid with the given 2D context
      * @param context The rendering context to use for rendering
      */
     render(context) {
         const drawables = this.prisms.concat(this.lights);
+        context.fillStyle = this.config.backgroundColor;
+        context.fillRect(0, 0, context.canvas.width, context.canvas.height);
         drawables.map(obj => obj.draw(context, this.config));
+    }
+    update(timeDelta) {
+        console.log('Sleep time: ' + timeDelta + 'ms');
     }
 }
 //# sourceMappingURL=grid.js.map

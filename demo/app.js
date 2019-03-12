@@ -1,13 +1,11 @@
 import { LightSource } from './lightsource';
 import { Grid } from './grid';
 import { Vector2, EquilateralTriangle } from './vector2';
-import { RenderConfig } from './renderconfig';
 import { Prism } from './prism';
-function render() {
-    let canvas = document.getElementById('canvas');
+function resize(grid, context) {
+    const canvas = context.canvas;
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    let context = canvas.getContext('2d');
     const prismCenter = new Vector2(canvas.width * 0.7, canvas.height * 0.5);
     let lightsources = [
         new Vector2(canvas.width * 0.2 - 5, canvas.height * 0.2 - 5),
@@ -16,15 +14,27 @@ function render() {
         prismCenter,
     ].map(pos => new LightSource(pos));
     let prisms = [EquilateralTriangle(prismCenter, 100)].map(vertices => new Prism(vertices));
-    let grid = new Grid(lightsources, prisms);
-    const config = new RenderConfig();
-    context.fillStyle = config.backgroundColor;
-    context.fillRect(0, 0, canvas.width, canvas.height);
-    grid.render(context);
+    grid.lights = lightsources;
+    grid.prisms = prisms;
 }
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Darkside started');
-    render();
+    let grid = new Grid();
+    let canvas = document.getElementById('canvas');
+    let context = canvas.getContext('2d');
+    window.addEventListener('resize', () => {
+        resize(grid, context);
+    });
+    resize(grid, context);
+    const fps = 60;
+    var lastRender = new Date().getTime();
+    setInterval(() => {
+        var startTime = new Date().getTime();
+        var timeDelta = startTime - lastRender;
+        grid.update(timeDelta);
+        grid.render(context);
+        lastRender = new Date().getTime();
+        console.log('Update+render took: ' + (lastRender - startTime) + 'ms');
+    }, 1000 / fps);
 });
-window.addEventListener('resize', render);
 //# sourceMappingURL=app.js.map
