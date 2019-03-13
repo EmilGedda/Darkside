@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     resize(grid, context);
+    grid.render(context);
     const fps = 1;
 
     var lastRender = new Date().getTime();
