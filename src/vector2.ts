@@ -46,6 +46,15 @@ export class Vector2 {
     }
 
     /**
+     * Returns a new Vector2 which is the current Vector2 moved by this offset in both x and y
+     * @param The position offset
+     * @return The relocated Vector2
+     */
+    public minus(rhs: Vector2): Vector2 {
+        return new Vector2(this.x - rhs.x, this.y - rhs.y);
+    }
+
+    /**
      * Returns the magnitude of a Vector2
      * @return the magnitude
      */
@@ -59,6 +68,17 @@ export class Vector2 {
      */
     public normalize(): Vector2 {
         return this.scale(1 / this.magnitude());
+    }
+
+    /**
+     * Rotate a Vector2 clockwise
+     * @return a Vector2 with its new direction
+     */
+    public rotate(angle: number): Vector2 {
+        return new Vector2(
+            this.x * Math.cos(angle) - this.y * Math.sin(angle),
+            this.x * Math.sin(angle) + this.y * Math.cos(angle)
+        );
     }
 }
 

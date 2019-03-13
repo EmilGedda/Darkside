@@ -1,13 +1,9 @@
 import { Vector2, EquilateralTriangle } from '../src/vector2';
 
-
 function randomVectors(amount: number): Vector2[] {
     let vectors: Vector2[] = [];
-    for(let i = 0; i < amount; i++) {
-        vectors.push(new Vector2(
-            Math.random() * 10000,
-            Math.random() * 10000,
-        ));
+    for (let i = 0; i < amount; i++) {
+        vectors.push(new Vector2(Math.random() * 10000 - 5000, Math.random() * 10000 - 5000));
     }
     return vectors;
 }
@@ -85,7 +81,7 @@ test('Vector2 EquilateralTriangle()', async () => {
 
 test('Vector2 normalize()', async () => {
     randomVectors(1000).map(v => {
-        const { x, y }= v.normalize();
+        const { x, y } = v.normalize();
         const unit = Vector2.fromRadians(v.toRadians());
         expect(x).toBeCloseTo(unit.x);
         expect(y).toBeCloseTo(unit.y);
@@ -97,5 +93,15 @@ test('Vector2 magnitude()', async () => {
         const scaled = Vector2.fromRadians(v.toRadians()).scale(v.magnitude());
         expect(v.x).toBeCloseTo(scaled.x);
         expect(v.y).toBeCloseTo(scaled.y);
+    });
+});
+
+test('Vector2 rotate()', async () => {
+    randomVectors(1000).map(v => {
+        const angle = (Math.random() * 8 - 4) * Math.PI;
+        const { x, y } = v.rotate(angle);
+        const scaled = Vector2.fromRadians(v.toRadians() + angle).scale(v.magnitude());
+        expect(x).toBeCloseTo(scaled.x);
+        expect(y).toBeCloseTo(scaled.y);
     });
 });
