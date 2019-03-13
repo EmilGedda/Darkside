@@ -1,3 +1,13 @@
+import materials from './data/materials.json';
+
+/**
+ * Material name constants.
+ */
+export enum MATERIAL {
+    SCHOTT_BK7 = 'SCHOTT_BK7',
+    SCHOTT_BAF10 = 'SCHOTT_BAF10',
+}
+
 /**
  * Material defined by Sellmeier coefficients.
  */
@@ -9,13 +19,15 @@ export class Material {
     private c2: number;
     private c3: number;
 
-    public constructor(b1: number, b2: number, b3: number, c1: number, c2: number, c3: number) {
-        this.b1 = b1;
-        this.b2 = b2;
-        this.b3 = b3;
-        this.c1 = c1;
-        this.c2 = c2;
-        this.c3 = c3;
+    public constructor(material: MATERIAL = MATERIAL.SCHOTT_BK7) {
+        const coeffs = materials[material];
+
+        this.b1 = coeffs[0];
+        this.b2 = coeffs[1];
+        this.b3 = coeffs[2];
+        this.c1 = coeffs[3];
+        this.c2 = coeffs[4];
+        this.c3 = coeffs[5];
     }
 
     /**
