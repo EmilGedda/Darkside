@@ -44,6 +44,22 @@ export class Vector2 {
     public plus(rhs: Vector2): Vector2 {
         return new Vector2(this.x + rhs.x, this.y + rhs.y);
     }
+
+    /**
+     * Returns the magnitude of a Vector2
+     * @return the magnitude
+     */
+    public magnitude(): number {
+        return Math.hypot(this.x, this.y);
+    }
+
+    /**
+     * Returns a normalized copy of this Vector2
+     * @return the normalized Vector2
+     */
+    public normalize(): Vector2 {
+        return this.scale(1 / this.magnitude());
+    }
 }
 
 /**
