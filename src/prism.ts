@@ -27,6 +27,6 @@ export class Prism implements Polygon, Drawable {
     }
 
     public draw(context: CanvasRenderingContext2D, config: RenderConfig): void {
-        drawLine(this.vertices, context, config);
+        drawLine(this.vertices, context, config.lineColor);
     }
 }
