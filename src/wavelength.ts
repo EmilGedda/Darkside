@@ -1,5 +1,6 @@
 import { XYZ } from './xyz';
 import { RGB } from './rgb';
+import { Material } from './material';
 
 /**
  * Wavelength defined by nanometers.
@@ -11,6 +12,23 @@ export class Wavelength {
 
     public constructor(wavelength: number) {
         this.value = wavelength;
+    }
+
+    /**
+     * Calculate refraction for wavelength entering from one medium to another.
+     * @param from material entering from
+     * @param to material entering into
+     * @param incision angle of incision
+     * @returns angle of refraction
+     */
+    public refract(from: Material, to: Material, incision: number): number {
+        // Avoid rounding error
+        if (from.name === to.name) {
+            return incision;
+        }
+        const n1 = from.refractiveIndex(this.value);
+        const n2 = to.refractiveIndex(this.value);
+        return Math.sin(incision) * (n1 / n2);
     }
 
     /**
