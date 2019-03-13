@@ -11,7 +11,7 @@ export class Prism {
         this.material = material;
     }
     draw(context, config) {
-        drawLine(this.vertices, context, config);
+        drawLine(this.vertices, context, config.lineColor);
     }
 }
 //# sourceMappingURL=prism.js.map

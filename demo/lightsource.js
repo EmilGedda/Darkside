@@ -1,4 +1,6 @@
 import { Vector2 } from './vector2';
+import { drawLine } from './draw';
+import { RGB } from './rgb';
 /**
  * A LightSource which emits Photons in a direction
  */
@@ -8,19 +10,23 @@ export class LightSource {
         this.spectrum = spectrum;
         this.rotation = rotation;
     }
+    /**
+     * Draws the LightSource's beam
+     * @param context The rendering context to draw width
+     * @param config The render config which defines styles and such
+     */
     draw(context, config) {
-        const x = this.position.x;
-        const y = this.position.y;
-        const radius = config.lightsourceRadius;
-        let gradient = context.createRadialGradient(x, y, radius, x, y, radius * 0.5);
-        gradient.addColorStop(0, 'rgba(255, 255, 255, 0)'); // TODO take this from RenderConfig
-        gradient.addColorStop(1, config.lightsourceColor);
-        context.beginPath();
-        context.fillRect(x - radius, y - radius, radius * 2, radius * 2);
-        context.arc(x, y, config.lightsourceRadius, 0, 2 * Math.PI);
-        context.fillStyle = gradient;
-        context.fill();
-        context.closePath();
+        if (this.spectrum.length < 1)
+            return;
+        const avg = (a, b) => {
+            return new RGB(Math.floor((a.r + b.r) / 2), Math.floor((a.g + b.g) / 2), Math.floor((a.b + b.b) / 2));
+        };
+        const blend = this.spectrum.map(w => w.toRGB()).reduce(avg);
+        // TODO: Limit scale to first collision
+        const endPoint = Vector2.fromRadians(this.rotation)
+            .scale(300)
+            .plus(this.position);
+        drawLine([this.position, endPoint], context, blend);
     }
 }
 //# sourceMappingURL=lightsource.js.map
