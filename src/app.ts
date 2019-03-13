@@ -2,6 +2,7 @@ import { LightSource } from './lightsource';
 import { Grid } from './grid';
 import { Vector2, EquilateralTriangle } from './vector2';
 import { Prism } from './prism';
+import { Wavelength } from './wavelength';
 
 function resize(grid: Grid, context: CanvasRenderingContext2D): void {
     const canvas = context.canvas;
@@ -17,6 +18,8 @@ function resize(grid: Grid, context: CanvasRenderingContext2D): void {
         new Vector2(canvas.width * 0.8 - 5, canvas.height * 0.8 - 5),
         prismCenter,
     ].map(pos => new LightSource(pos));
+
+    lightsources[1].spectrum = [new Wavelength(700), new Wavelength(400)];
 
     let prisms = [EquilateralTriangle(prismCenter, 100)].map(vertices => new Prism(vertices));
 
@@ -37,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     resize(grid, context);
-    const fps = 60;
+    const fps = 1;
 
     var lastRender = new Date().getTime();
     setInterval(() => {
