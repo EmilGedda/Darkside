@@ -3,6 +3,7 @@ import { Grid } from './grid';
 import { Vector2, EquilateralTriangle } from './vector2';
 import { Prism } from './prism';
 import { Wavelength } from './wavelength';
+import '../css/canvas.css';
 function resize(grid, context) {
     const canvas = context.canvas;
     canvas.width = window.innerWidth;
@@ -21,9 +22,10 @@ function resize(grid, context) {
 }
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Darkside started');
-    let grid = new Grid();
-    let canvas = document.getElementById('canvas');
+    let canvas = document.createElement('canvas');
+    document.body.appendChild(canvas);
     let context = canvas.getContext('2d');
+    let grid = new Grid();
     window.addEventListener('resize', () => {
         resize(grid, context);
     });
