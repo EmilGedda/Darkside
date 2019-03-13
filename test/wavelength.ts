@@ -18,7 +18,6 @@ test('Wavelength.refract(from: Material, to: Material, incision: number): number
     expect(wl.refract(baf10, bk7, 0)).toBe(0);
     expect(wl.refract(baf10, bk7, Math.PI / 8)).toBeCloseTo(0.4246022017706678);
     expect(wl.refract(vacuum, bk7, Math.PI / 4)).toBeCloseTo(0.4609263517582702);
-    
     expect(wl.refract(bk7, bk7, Math.PI / 4)).toBeCloseTo(Math.PI / 4);
     expect(wl.refract(baf10, baf10, Math.PI / 4)).toBeCloseTo(Math.PI / 4);
     expect(wl.refract(vacuum, vacuum, Math.PI / 4)).toBeCloseTo(Math.PI / 4);
