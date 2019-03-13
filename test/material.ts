@@ -1,13 +1,9 @@
 import { Material, MATERIAL } from '../src/material';
-import fs from 'fs';
-import path from 'path';
+// @ts-ignore
+import materials from './../src/data/materials.json';
 
 test('Material constants file', async () => {
-    const jsonPath = path.join(__dirname, '..', 'src', 'data', 'materials.json');
-    fs.readFile(jsonPath, (err, data) => {
-        expect(err).toBeNull();
-        JSON.parse(data.toString());
-    });
+    expect(materials).toBeDefined;
 });
 
 test('Material construction', async () => {

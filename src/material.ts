@@ -1,5 +1,4 @@
-import fs from 'fs';
-import path from 'path';
+import materials from './data/materials.json';
 
 /**
  * Material name constants.
@@ -21,9 +20,7 @@ export class Material {
     private c3: number;
 
     public constructor(material: MATERIAL = MATERIAL.SCHOTT_BK7) {
-        const jsonPath = path.join(__dirname, 'data', 'materials.json');
-        const json = JSON.parse(fs.readFileSync(jsonPath).toString());
-        const coeffs = json[material];
+        const coeffs = materials[material];
 
         this.b1 = coeffs[0];
         this.b2 = coeffs[1];
