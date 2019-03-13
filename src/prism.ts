@@ -5,14 +5,7 @@ import { Drawable, drawLine } from './draw';
 import { RenderConfig } from './renderconfig';
 
 // Schott BK7 glass
-const SCHOTT_BK7 = new Material(
-    1.03961212,
-    0.231792344,
-    0.231792344,
-    6.00069867e-3,
-    2.00179144e-2,
-    1.03560653e2
-);
+const SCHOTT_BK7 = new Material();
 
 /**
  * A prism for use in simulation
