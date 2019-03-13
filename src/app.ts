@@ -12,21 +12,17 @@ function resize(grid: Grid, context: CanvasRenderingContext2D): void {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    const prismCenter = new Vector2(canvas.width * 0.7, canvas.height * 0.5);
-
-    let lightsources = [
-        new Vector2(canvas.width * 0.2 - 5, canvas.height * 0.2 - 5),
+    const lightsource = new LightSource(
         new Vector2(canvas.width * 0.5 - 5, canvas.height * 0.5 - 5),
-        new Vector2(canvas.width * 0.8 - 5, canvas.height * 0.8 - 5),
-        prismCenter,
-    ].map(pos => new LightSource(pos));
+        Math.PI / 6,
+        [new Wavelength(475), new Wavelength(550), new Wavelength(600), new Wavelength(750)]
+    );
 
-    lightsources[1].spectrum = [new Wavelength(700), new Wavelength(400)];
+    const prismCenter = new Vector2(canvas.width * 0.7, canvas.height * 0.5);
+    const prism = new Prism(EquilateralTriangle(prismCenter, 100));
 
-    let prisms = [EquilateralTriangle(prismCenter, 100)].map(vertices => new Prism(vertices));
-
-    grid.lights = lightsources;
-    grid.prisms = prisms;
+    grid.lights = [lightsource];
+    grid.prisms = [prism];
 }
 
 document.addEventListener('DOMContentLoaded', () => {
