@@ -5,7 +5,8 @@
     },
     "rules": {
         "semi": "error",
-        "max-len": [2, 120, 4]
+        "max-len": [2, 120, 4],
+        "@typescript-eslint/no-unused-vars": "off"
     },
     "parserOptions":  {
         "ecmaVersion":  2018,

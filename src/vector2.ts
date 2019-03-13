@@ -26,6 +26,24 @@ export class Vector2 {
     public static fromRadians(theta: number): Vector2 {
         return new Vector2(Math.cos(theta), Math.sin(theta));
     }
+
+    /**
+     * Creates a new Vector  from this which is scaled by the given constant
+     * @param scale the scale for the Vector2
+     * @return The longer Vector2
+     */
+    public scale(k: number): Vector2 {
+        return new Vector2(this.x * k, this.y * k);
+    }
+
+    /**
+     * Returns a new Vector2 which is the current Vector2 moved by this offset in both x and y
+     * @param The position offset
+     * @return The relocated Vector2
+     */
+    public plus(rhs: Vector2): Vector2 {
+        return new Vector2(this.x + rhs.x, this.y + rhs.y);
+    }
 }
 
 /**
