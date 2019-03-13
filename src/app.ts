@@ -3,7 +3,7 @@ import { Grid } from './grid';
 import { Vector2, EquilateralTriangle } from './vector2';
 import { Prism } from './prism';
 
-import '../css/canvas.css'
+import '../css/canvas.css';
 
 function resize(grid: Grid, context: CanvasRenderingContext2D): void {
     const canvas = context.canvas;
