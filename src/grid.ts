@@ -26,14 +26,10 @@ export class Grid {
      * Renders the grid with the given 2D context
      * @param context The rendering context to use for rendering
      */
-    public render(context: CanvasRenderingContext2D): void {
+    public render(context: CanvasRenderingContext2D, timeDelta: number): void {
         context.fillStyle = this.config.backgroundColor;
         context.fillRect(0, 0, context.canvas.width, context.canvas.height);
         const drawables = (this.lights as Drawable[]).concat(this.prisms as Drawable[]);
-        drawables.map(obj => obj.draw(context, this.config));
-    }
-
-    public update(timeDelta: number): void {
-        console.log('Sleep time: ' + timeDelta + 'ms');
+        drawables.map(obj => obj.draw(context, this.config, timeDelta));
     }
 }

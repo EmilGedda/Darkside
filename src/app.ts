@@ -14,7 +14,7 @@ function resize(grid: Grid, context: CanvasRenderingContext2D): void {
 
     const lightsource = new LightSource(
         new Vector2(canvas.width * 0.5 - 5, canvas.height * 0.5 - 5),
-        Math.PI / 6,
+        0,
         [new Wavelength(475), new Wavelength(550), new Wavelength(600), new Wavelength(750)]
     );
 
@@ -36,15 +36,14 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', () => resize(grid, context));
 
     resize(grid, context);
-    grid.render(context);
-    const fps = 1;
+    const fps = 60;
+    grid.render(context, 1 / fps);
 
     var lastRender = performance.now();
     setInterval(() => {
         let startTime = performance.now();
         let timeDelta = startTime - lastRender;
-        grid.update(timeDelta);
-        grid.render(context);
+        grid.render(context, timeDelta);
         lastRender = performance.now();
         console.log('Update+render took: ' + (lastRender - startTime) + 'ms');
     }, 1000 / fps);

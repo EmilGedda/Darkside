@@ -1,6 +1,6 @@
 import { Vector2 } from './vector2';
 import { RenderConfig } from './renderconfig';
-import { Drawable, drawLine } from './draw';
+import { Drawable, drawSine, drawLine } from './draw';
 import { Wavelength } from './wavelength';
 import { RGB } from './rgb';
 
@@ -14,6 +14,7 @@ export class LightSource implements Drawable {
     public rotation: Radians;
     public position: Point;
     public spectrum: Wavelength[];
+    private offset: number = 0;
 
     public constructor(
         position: Point = new Vector2(0, 0),
@@ -30,14 +31,17 @@ export class LightSource implements Drawable {
      * @param context The rendering context to draw width
      * @param config The render config which defines styles and such
      */
-    public draw(context: CanvasRenderingContext2D, config: RenderConfig): void {
+    public draw(context: CanvasRenderingContext2D, config: RenderConfig, timeDelta: number): void {
         if (this.spectrum.length < 1) return;
+
+        this.offset += timeDelta / 350;
+        const brightness = 1;
 
         const avg = (a: RGB, b: RGB): RGB => {
             return new RGB(
-                Math.floor((a.r + b.r) / 2),
-                Math.floor((a.g + b.g) / 2),
-                Math.floor((a.b + b.b) / 2)
+                Math.floor((a.r + b.r) / brightness),
+                Math.floor((a.g + b.g) / brightness),
+                Math.floor((a.b + b.b) / brightness)
             );
         };
 
@@ -48,6 +52,18 @@ export class LightSource implements Drawable {
             .scale(300)
             .plus(this.position);
 
-        drawLine([this.position, endPoint], context, blend);
+        //drawLine([this.position, endPoint], context, blend);
+
+        drawSine(
+            {
+                start: this.position,
+                end: endPoint,
+                amplitude: 6,
+                period: 12,
+                offset: -this.offset,
+            },
+            context,
+            blend
+        );
     }
 }
