@@ -27,9 +27,13 @@ export class Grid {
      * @param context The rendering context to use for rendering
      */
     public render(context: CanvasRenderingContext2D, timeDelta: number): void {
-        context.fillStyle = this.config.backgroundColor;
+        context.fillStyle = this.config.backgroundColor.toString();
         context.fillRect(0, 0, context.canvas.width, context.canvas.height);
         const drawables = (this.lights as Drawable[]).concat(this.prisms as Drawable[]);
-        drawables.map(obj => obj.draw(context, this.config, timeDelta));
+        drawables.map(obj => {
+            context.save();
+            obj.draw(context, this.config, timeDelta);
+            context.restore();
+        });
     }
 }

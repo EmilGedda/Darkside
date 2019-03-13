@@ -32,16 +32,30 @@ export interface Drawable {
  * @param condig config for styling the rendering
  */
 export function drawLine(points: Point[], context: CanvasRenderingContext2D, color: RGB): void {
+    context.beginPath();
+    context.strokeStyle = color.toString();
     let prev = points[points.length - 1];
+    context.moveTo(prev.x, prev.y);
     for (let current of points) {
-        context.beginPath();
-        context.strokeStyle = color.toString();
-        context.moveTo(prev.x, prev.y);
         context.lineTo(current.x, current.y);
-        context.stroke();
-        context.closePath();
-        prev = current;
     }
+    context.stroke();
+}
+
+/**
+ * Draw a line between a list of vertices
+ * @param points a list of points to draw lines between, including between the first and last vertex
+ * @param condig config for styling the rendering
+ */
+export function fillPolygon(points: Point[], context: CanvasRenderingContext2D, color: RGB): void {
+    context.beginPath();
+    context.fillStyle = color.toString();
+    let prev = points[points.length - 1];
+    context.moveTo(prev.x, prev.y);
+    for (let current of points) {
+        context.lineTo(current.x, current.y);
+    }
+    context.fill();
 }
 
 /**
@@ -59,14 +73,16 @@ export function drawSine(
     const length = line.magnitude();
     const stepSize = 2;
 
+    context.beginPath();
     context.strokeStyle = color.toString();
     context.lineWidth = 1;
 
     for (let flatX = 0; flatX < length; flatX += stepSize) {
         const flatY = curve.amplitude * Math.sin(flatX / curve.period + curve.offset);
         const { x, y } = new Vector2(flatX, flatY).rotate(rotation).plus(curve.start);
-        if (flatX === 0) context.moveTo(x, y);
-        context.lineTo(x, y);
+        if (flatX === 0) context.moveTo(x, y + 0.5);
+        context.lineTo(x, y + 0.5);
         context.stroke();
     }
+    context.closePath();
 }

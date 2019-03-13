@@ -28,6 +28,13 @@ export class Vector2 {
     }
 
     /**
+     * Returns the average of two Vector2
+     * @param rhs the other Vector2
+     */
+    public static average(lhs: Vector2, rhs: Vector2): Vector2 {
+        return new Vector2((lhs.x + rhs.x) / 2, (lhs.y + rhs.y) / 2);
+    }
+    /**
      * Creates a new Vector  from this which is scaled by the given constant
      * @param scale the scale for the Vector2
      * @return The longer Vector2
