@@ -15,6 +15,7 @@ export class LightSource implements Drawable {
     public position: Point;
     public spectrum: Wavelength[];
     private offset: number = 0;
+    private count: number = 0;
 
     public constructor(
         position: Point = new Vector2(0, 0),
@@ -34,7 +35,8 @@ export class LightSource implements Drawable {
     public draw(context: CanvasRenderingContext2D, config: RenderConfig, timeDelta: number): void {
         if (this.spectrum.length < 1) return;
 
-        this.offset += timeDelta / 350;
+        this.offset = this.offset + timeDelta / 350;
+        this.count++;
         const brightness = 1;
 
         const avg = (a: RGB, b: RGB): RGB => {
@@ -61,9 +63,11 @@ export class LightSource implements Drawable {
                 amplitude: 6,
                 period: 12,
                 offset: -this.offset,
+                count: this.count,
             },
             context,
-            blend
+            blend,
+            config
         );
     }
 }

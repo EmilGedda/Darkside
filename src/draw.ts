@@ -12,6 +12,7 @@ export interface SineCurveConfig {
     amplitude: number;
     period: number;
     offset: number;
+    count: number;
 }
 
 /**
@@ -66,23 +67,27 @@ export function fillPolygon(points: Point[], context: CanvasRenderingContext2D, 
 export function drawSine(
     curve: SineCurveConfig,
     context: CanvasRenderingContext2D,
-    color: RGB
+    color: RGB,
+    config: RenderConfig
 ): void {
     const line = curve.end.minus(curve.start);
     const rotation = line.toRadians();
     const length = line.magnitude();
-    const stepSize = 2;
+    const stepSize = 20;
 
-    context.beginPath();
-    context.strokeStyle = color.toString();
-    context.lineWidth = 1;
-
-    for (let flatX = 0; flatX < length; flatX += stepSize) {
+    for (let flatX = (curve.count / 2) % stepSize; flatX < length; flatX += stepSize) {
+        context.beginPath();
         const flatY = curve.amplitude * Math.sin(flatX / curve.period + curve.offset);
         const { x, y } = new Vector2(flatX, flatY).rotate(rotation).plus(curve.start);
+
+        const radius = 4;
+        let gradient = context.createRadialGradient(x, y, 1, x, y, radius);
+        gradient.addColorStop(0, color.toString());
+        gradient.addColorStop(1, config.backgroundColor.toString());
+        context.lineWidth = 1;
+
         if (flatX === 0) context.moveTo(x, y + 0.5);
-        context.lineTo(x, y + 0.5);
-        context.stroke();
+        context.fillStyle = gradient;
+        context.fillRect(x - radius - 2, y - radius - 2, x + radius + 2, y + radius + 2);
     }
-    context.closePath();
 }
