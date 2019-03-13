@@ -1,14 +1,24 @@
+import materials from './data/materials.json';
+/**
+ * Material name constants.
+ */
+export var MATERIAL;
+(function (MATERIAL) {
+    MATERIAL["SCHOTT_BK7"] = "SCHOTT_BK7";
+    MATERIAL["SCHOTT_BAF10"] = "SCHOTT_BAF10";
+})(MATERIAL || (MATERIAL = {}));
 /**
  * Material defined by Sellmeier coefficients.
  */
 export class Material {
-    constructor(b1, b2, b3, c1, c2, c3) {
-        this.b1 = b1;
-        this.b2 = b2;
-        this.b3 = b3;
-        this.c1 = c1;
-        this.c2 = c2;
-        this.c3 = c3;
+    constructor(material = MATERIAL.SCHOTT_BK7) {
+        const coeffs = materials[material];
+        this.b1 = coeffs[0];
+        this.b2 = coeffs[1];
+        this.b3 = coeffs[2];
+        this.c1 = coeffs[3];
+        this.c2 = coeffs[4];
+        this.c3 = coeffs[5];
     }
     /**
      * Calculate the refractive index of the material for a given wavelength

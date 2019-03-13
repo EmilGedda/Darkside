@@ -145,6 +145,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /***/ }),
 
+/***/ "./dist/data/materials.json":
+/*!**********************************!*\
+  !*** ./dist/data/materials.json ***!
+  \**********************************/
+/*! exports provided: SCHOTT_BK7, SCHOTT_BAF10, default */
+/***/ (function(module) {
+
+module.exports = {"SCHOTT_BK7":[1.03961212,0.231792344,0.231792344,0.00600069867,0.0200179144,103.560653],"SCHOTT_BAF10":[1.5851495,0.143559385,1.08521269,0.00926681282,0.0424489805,105.613573]};
+
+/***/ }),
+
 /***/ "./dist/draw.js":
 /*!**********************!*\
   !*** ./dist/draw.js ***!
@@ -268,23 +279,36 @@ class LightSource {
 /*!**************************!*\
   !*** ./dist/material.js ***!
   \**************************/
-/*! exports provided: Material */
+/*! exports provided: MATERIAL, Material */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MATERIAL", function() { return MATERIAL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Material", function() { return Material; });
+/* harmony import */ var _data_materials_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./data/materials.json */ "./dist/data/materials.json");
+var _data_materials_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./data/materials.json */ "./dist/data/materials.json", 1);
+
+/**
+ * Material name constants.
+ */
+var MATERIAL;
+(function (MATERIAL) {
+    MATERIAL["SCHOTT_BK7"] = "SCHOTT_BK7";
+    MATERIAL["SCHOTT_BAF10"] = "SCHOTT_BAF10";
+})(MATERIAL || (MATERIAL = {}));
 /**
  * Material defined by Sellmeier coefficients.
  */
 class Material {
-    constructor(b1, b2, b3, c1, c2, c3) {
-        this.b1 = b1;
-        this.b2 = b2;
-        this.b3 = b3;
-        this.c1 = c1;
-        this.c2 = c2;
-        this.c3 = c3;
+    constructor(material = MATERIAL.SCHOTT_BK7) {
+        const coeffs = _data_materials_json__WEBPACK_IMPORTED_MODULE_0__[material];
+        this.b1 = coeffs[0];
+        this.b2 = coeffs[1];
+        this.b3 = coeffs[2];
+        this.c1 = coeffs[3];
+        this.c2 = coeffs[4];
+        this.c3 = coeffs[5];
     }
     /**
      * Calculate the refractive index of the material for a given wavelength
@@ -320,7 +344,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // Schott BK7 glass
-const SCHOTT_BK7 = new _material__WEBPACK_IMPORTED_MODULE_0__["Material"](1.03961212, 0.231792344, 0.231792344, 6.00069867e-3, 2.00179144e-2, 1.03560653e2);
+const SCHOTT_BK7 = new _material__WEBPACK_IMPORTED_MODULE_0__["Material"]();
 /**
  * A prism for use in simulation
  */
