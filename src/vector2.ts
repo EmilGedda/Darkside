@@ -28,6 +28,13 @@ export class Vector2 {
     }
 
     /**
+     * Returns the average of two Vector2
+     * @param rhs the other Vector2
+     */
+    public static average(lhs: Vector2, rhs: Vector2): Vector2 {
+        return new Vector2((lhs.x + rhs.x) / 2, (lhs.y + rhs.y) / 2);
+    }
+    /**
      * Creates a new Vector  from this which is scaled by the given constant
      * @param scale the scale for the Vector2
      * @return The longer Vector2
@@ -43,6 +50,42 @@ export class Vector2 {
      */
     public plus(rhs: Vector2): Vector2 {
         return new Vector2(this.x + rhs.x, this.y + rhs.y);
+    }
+
+    /**
+     * Returns a new Vector2 which is the current Vector2 moved by this offset in both x and y
+     * @param The position offset
+     * @return The relocated Vector2
+     */
+    public minus(rhs: Vector2): Vector2 {
+        return new Vector2(this.x - rhs.x, this.y - rhs.y);
+    }
+
+    /**
+     * Returns the magnitude of a Vector2
+     * @return the magnitude
+     */
+    public magnitude(): number {
+        return Math.hypot(this.x, this.y);
+    }
+
+    /**
+     * Returns a normalized copy of this Vector2
+     * @return the normalized Vector2
+     */
+    public normalize(): Vector2 {
+        return this.scale(1 / this.magnitude());
+    }
+
+    /**
+     * Rotate a Vector2 clockwise
+     * @return a Vector2 with its new direction
+     */
+    public rotate(angle: number): Vector2 {
+        return new Vector2(
+            this.x * Math.cos(angle) - this.y * Math.sin(angle),
+            this.x * Math.sin(angle) + this.y * Math.cos(angle)
+        );
     }
 }
 

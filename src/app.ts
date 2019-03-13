@@ -12,21 +12,17 @@ function resize(grid: Grid, context: CanvasRenderingContext2D): void {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    const prismCenter = new Vector2(canvas.width * 0.7, canvas.height * 0.5);
-
-    let lightsources = [
-        new Vector2(canvas.width * 0.2 - 5, canvas.height * 0.2 - 5),
+    const lightsource = new LightSource(
         new Vector2(canvas.width * 0.5 - 5, canvas.height * 0.5 - 5),
-        new Vector2(canvas.width * 0.8 - 5, canvas.height * 0.8 - 5),
-        prismCenter,
-    ].map(pos => new LightSource(pos));
+        0,
+        [new Wavelength(475), new Wavelength(550), new Wavelength(600), new Wavelength(750)]
+    );
 
-    lightsources[1].spectrum = [new Wavelength(700), new Wavelength(400)];
+    const prismCenter = new Vector2(canvas.width * 0.7, canvas.height * 0.5);
+    const prism = new Prism(EquilateralTriangle(prismCenter, 100));
 
-    let prisms = [EquilateralTriangle(prismCenter, 100)].map(vertices => new Prism(vertices));
-
-    grid.lights = lightsources;
-    grid.prisms = prisms;
+    grid.lights = [lightsource];
+    grid.prisms = [prism];
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -37,22 +33,18 @@ document.addEventListener('DOMContentLoaded', () => {
     let context = canvas.getContext('2d') as CanvasRenderingContext2D;
 
     let grid = new Grid();
-
-    window.addEventListener('resize', () => {
-        resize(grid, context);
-    });
+    window.addEventListener('resize', () => resize(grid, context));
 
     resize(grid, context);
-    grid.render(context);
-    const fps = 1;
+    const fps = 60;
+    grid.render(context, 1 / fps);
 
-    var lastRender = new Date().getTime();
+    var lastRender = performance.now();
     setInterval(() => {
-        var startTime = new Date().getTime();
-        var timeDelta = startTime - lastRender;
-        grid.update(timeDelta);
-        grid.render(context);
-        lastRender = new Date().getTime();
+        let startTime = performance.now();
+        let timeDelta = startTime - lastRender;
+        grid.render(context, timeDelta);
+        lastRender = performance.now();
         console.log('Update+render took: ' + (lastRender - startTime) + 'ms');
     }, 1000 / fps);
 });
