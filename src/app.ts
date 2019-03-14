@@ -35,8 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let grid = new Grid();
     window.addEventListener('resize', () => resize(grid, context));
 
-    resize(grid, context);
     const fps = 60;
+    resize(grid, context);
+    grid.update();
     grid.render(context, 1 / fps);
 
     var lastRender = performance.now();
@@ -45,6 +46,5 @@ document.addEventListener('DOMContentLoaded', () => {
         let timeDelta = startTime - lastRender;
         grid.render(context, timeDelta);
         lastRender = performance.now();
-        console.log('Update+render took: ' + (lastRender - startTime) + 'ms');
     }, 1000 / fps);
 });

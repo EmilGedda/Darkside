@@ -82,12 +82,14 @@ export function drawSine(
 
         const radius = 4;
         let gradient = context.createRadialGradient(x, y, 1, x, y, radius);
-        gradient.addColorStop(0, color.toString());
-        gradient.addColorStop(1, config.backgroundColor.toString());
         context.lineWidth = 1;
 
         if (flatX === 0) context.moveTo(x, y + 0.5);
-        context.fillStyle = gradient;
-        context.fillRect(x - radius - 2, y - radius - 2, x + radius + 2, y + radius + 2);
+        context.fillStyle = color.toString(); 
+        //context.fillRect(x - radius - 2, y - radius - 2, x + radius + 2, y + radius + 2);
+        context.strokeStyle = gradient;
+        context.arc(x, y, radius, 0, Math.PI * 2);
+        context.fill();
+        context.stroke();
     }
 }

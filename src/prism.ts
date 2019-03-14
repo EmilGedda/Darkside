@@ -10,8 +10,8 @@ const SCHOTT_BK7 = new Material();
  * A prism for use in simulation
  */
 export class Prism implements Drawable {
-    private vertices: Vector2[];
-    private inner: Vector2[];
+    public vertices: Vector2[];
+    public inner: Vector2[];
     public material: Material;
 
     public constructor(vertices: Vector2[], material: Material = SCHOTT_BK7) {
