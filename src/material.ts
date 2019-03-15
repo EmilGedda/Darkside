@@ -7,6 +7,7 @@ export enum MATERIAL {
     VACUUM = 'VACUUM',
     SCHOTT_BK7 = 'SCHOTT_BK7',
     SCHOTT_BAF10 = 'SCHOTT_BAF10',
+    SCHOOTT_SF10 = 'SCHOTT_SF10',
 }
 
 /**
