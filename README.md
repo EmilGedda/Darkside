@@ -20,7 +20,7 @@ This will generate a `index.html` file in the `dist` directory. Open it in your 
 
 ## Unit Testing
 
-To run all unit tests, please run `$ npm test` in the project directory.
+To run all unit tests, please run `npm test` in the project directory.
 
 ## Licensing
 Darkside is licensed under the MIT License © Emil Gedda & Anders Eriksson 2019. For more information see file [LICENSE](LICENSE).
