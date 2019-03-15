@@ -1,5 +1,7 @@
 # Darkside - Light Dispersion Simulation
 
+![Darkside Screenshot](darkside.png)
+
 Darkside is a 2D light dispersion simulation that runs in the browser.
 
 ## Live Demo
