@@ -12,7 +12,7 @@ A live demo is hosted at https://emilgedda.github.io/Darkside/demo
 
 To install the project, please run the following commands in the project root folder after cloning:
 
-```
+```bash
 $ npm install   # install dependencies
 $ npm run build # build project
 ```
